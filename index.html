@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>فحمة ونار - الكاشير</title>
+  <style>
+    body { font-family: system-ui, -apple-system, sans-serif; background: #121212; color: #fff; margin: 0; padding: 20px; }
+    h1 { color: #ff5722; text-align: center; margin-bottom: 20px; }
+    .container { max-width: 550px; margin: 0 auto; background: #1e1e1e; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+    
+    .menu-title { font-size: 18px; margin-top: 10px; color: #ffeb3b; border-bottom: 1px solid #333; padding-bottom: 8px; font-weight: bold; }
+    
+    /* تنسيق قائمة الطعام */
+    .menu-item { display: flex; flex-direction: column; background: #2a2a2a; padding: 12px; margin: 12px 0; border-radius: 8px; border: 1px solid #333; }
+    .item-header { display: flex; align-items: center; justify-content: space-between; }
+    .item-info { display: flex; align-items: center; gap: 12px; }
+    .item-img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; background: #333; }
+    .item-details { display: flex; flex-direction: column; }
+    .item-name { font-size: 16px; font-weight: bold; color: #fff; }
+    .item-price { font-size: 14px; color: #ff9800; margin-top: 4px; }
+    
+    /* تنسيق خيارات Checkbox ✅ */
+    .options-group { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; padding-top: 8px; border-top: 1px dashed #444; }
+    .option-label { display: flex; align-items: center; gap: 6px; background: #1a1a1a; padding: 6px 10px; border-radius: 6px; font-size: 13px; color: #ddd; cursor: pointer; border: 1px solid #444; user-select: none; }
+    .option-label input[type="checkbox"], .option-label input[type="radio"] { accent-color: #ff5722; width: 16px; height: 16px; cursor: pointer; }
+
+    .btn-add { background: #ff5722; color: #fff; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px; transition: 0.2s; }
+    .btn-add:hover { background: #e64a19; }
+
+    /* تنسيق سلة الطلبات */
+    .cart { margin-top: 25px; background: #252525; padding: 15px; border-radius: 8px; border-top: 2px solid #ff5722; }
+    .cart-item { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+    .item-title-cart { font-weight: bold; font-size: 16px; color: #fff; }
+    .item-options-list { margin-top: 4px; padding-right: 12px; font-size: 13px; color: #bbb; line-height: 1.5; }
+    .cart-controls { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+    .qty-controls { display: flex; align-items: center; }
+    .cart-total { font-size: 18px; font-weight: bold; color: #4caf50; margin-top: 15px; text-align: left; }
+    .note-input { width: 95%; padding: 10px; border-radius: 6px; border: 1px solid #444; background: #121212; color: #fff; margin-top: 10px; font-size: 14px; }
+    .send-btn { width: 100%; background: #28a745; color: white; border: none; padding: 14px; font-size: 18px; font-weight: bold; border-radius: 8px; margin-top: 15px; cursor: pointer; transition: 0.2s; }
+    .send-btn:disabled { background: #555; cursor: not-allowed; }
+    .qty-btn { background: #444; color: #fff; border: none; padding: 3px 10px; margin: 0 4px; border-radius: 4px; cursor: pointer; font-weight: bold; font-size: 14px; }
+    .qty-btn:hover { background: #666; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>🔥 فحمة ونار - الكاشير</h1>
+
+    <div class="menu-title">قائمة الطعام</div>
+    
+    <!-- برجر لحم -->
+    <div class="menu-item">
+      <div class="item-header">
+        <div class="item-info">
+          <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=150" class="item-img" alt="برجر لحم">
+          <div class="item-details">
+            <span class="item-name">برجر لحم</span>
+            <span class="item-price">2.500 ر.ع</span>
+          </div>
+        </div>
+        <button class="btn-add" id="btn-add-beef">+ إضافة</button>
+      </div>
+      <div class="options-group">
+        <label class="option-label"><input type="checkbox" class="beef-opt" value="بصل"> بصل</label>
+        <label class="option-label"><input type="checkbox" class="beef-opt" value="هالبينو 🌶️"> هالبينو 🌶️</label>
+        <label class="option-label"><input type="checkbox" class="beef-opt" value="جبن"> جبن</label>
+      </div>
+    </div>
+
+    <!-- برجر دجاج -->
+    <div class="menu-item">
+      <div class="item-header">
+        <div class="item-info">
+          <img src="https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?w=150" class="item-img" alt="برجر دجاج">
+          <div class="item-details">
+            <span class="item-name">برجر دجاج</span>
+            <span class="item-price">2.000 ر.ع</span>
+          </div>
+        </div>
+        <button class="btn-add" id="btn-add-chicken">+ إضافة</button>
+      </div>
+      <div class="options-group">
+        <label class="option-label"><input type="checkbox" class="chicken-opt" value="بصل"> بصل</label>
+        <label class="option-label"><input type="checkbox" class="chicken-opt" value="هالبينو 🌶️"> هالبينو 🌶️</label>
+        <label class="option-label"><input type="checkbox" class="chicken-opt" value="جبن"> جبن</label>
+      </div>
+    </div>
+
+    <!-- بطاطس مقلية -->
+    <div class="menu-item">
+      <div class="item-header">
+        <div class="item-info">
+          <img src="https://images.unsplash.com/photo-1576107232684-1279f390859f?w=150" class="item-img" alt="بطاطس مقلية">
+          <div class="item-details">
+            <span class="item-name">بطاطس مقلية</span>
+            <span class="item-price">0.800 ر.ع</span>
+          </div>
+        </div>
+        <button class="btn-add" id="btn-add-fries">+ إضافة</button>
+      </div>
+    </div>
+
+    <!-- مشروب غازي -->
+    <div class="menu-item">
+      <div class="item-header">
+        <div class="item-info">
+          <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=150" class="item-img" alt="مشروب غازي">
+          <div class="item-details">
+            <span class="item-name">مشروب غازي</span>
+            <span class="item-price">0.500 ر.ع</span>
+          </div>
+        </div>
+        <button class="btn-add" id="btn-add-drink">+ إضافة</button>
+      </div>
+      <div class="options-group">
+        <label class="option-label"><input type="radio" name="drink-choice" value="ديو" checked> ديو</label>
+        <label class="option-label"><input type="radio" name="drink-choice" value="بيبسي"> بيبسي</label>
+        <label class="option-label"><input type="radio" name="drink-choice" value="كينزا"> كينزا</label>
+        <label class="option-label"><input type="radio" name="drink-choice" value="سفن أب"> سفن أب</label>
+      </div>
+    </div>
+
+    <!-- السلة -->
+    <div class="cart">
+      <h3 style="margin-top:0;">تفاصيل الطلب:</h3>
+      <div id="cart-items"><p style="color: #888;">لم يتم إضافة وجبات بعد</p></div>
+      <input type="text" id="order-notes" class="note-input" placeholder="ملاحظات إضافية (مثال: زيادة صوص)...">
+      <div class="cart-total">المجموع: <span id="total-price">0.000</span> ر.ع</div>
+      <button id="send-order-btn" class="send-btn" disabled>إرسال الطلب للمطبخ 🚀</button>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, doc, runTransaction, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBMhFkriM0ldsOvqM6M6pquZDKJsB6zDgs",
+      authDomain: "fahma-w-nar.firebaseapp.com",
+      projectId: "fahma-w-nar",
+      storageBucket: "fahma-w-nar.firebasestorage.app",
+      messagingSenderId: "317690982815",
+      appId: "1:317690982815:web:a2c902e46051dfd865582a",
+      measurementId: "G-FQYW3YY6W3"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    let currentCart = [];
+    const getTodayDate = () => new Date().toISOString().split('T')[0];
+
+    function addToCart(title, options, price) {
+      const optionsKey = options.join('|');
+      const existing = currentCart.find(i => i.title === title && i.optionsKey === optionsKey);
+      
+      if (existing) {
+        existing.count++;
+      } else {
+        currentCart.push({
+          title,
+          options,
+          optionsKey,
+          price,
+          count: 1
+        });
+      }
+      renderCart();
+    }
+
+    function changeQty(index, change) {
+      currentCart[index].count += change;
+      if (currentCart[index].count <= 0) {
+        currentCart.splice(index, 1);
+      }
+      renderCart();
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cart-items');
+      const btn = document.getElementById('send-order-btn');
+      const totalSpan = document.getElementById('total-price');
+
+      if (currentCart.length === 0) {
+        container.innerHTML = '<p style="color: #888;">لم يتم إضافة وجبات بعد</p>';
+        totalSpan.innerText = '0.000';
+        btn.disabled = true;
+        return;
+      }
+
+      let total = 0;
+      container.innerHTML = currentCart.map((item, index) => {
+        const itemTotal = item.price * item.count;
+        total += itemTotal;
+
+        const optionsHtml = item.options.length > 0 
+          ? `<div class="item-options-list">${item.options.map(opt => `. ${opt}`).join('<br>')}</div>` 
+          : '';
+
+        return `
+          <div class="cart-item">
+            <div>
+              <div class="item-title-cart">• ${item.title}</div>
+              ${optionsHtml}
+            </div>
+            <div class="cart-controls">
+              <div class="qty-controls">
+                <button class="qty-btn" data-action="minus" data-index="${index}">-</button>
+                <span>x${item.count}</span>
+                <button class="qty-btn" data-action="plus" data-index="${index}">+</button>
+              </div>
+              <span style="font-weight:bold; color:#ff9800;">${itemTotal.toFixed(3)} ر.ع</span>
+            </div>
+          </div>`;
+      }).join('');
+      
+      totalSpan.innerText = total.toFixed(3);
+      btn.disabled = false;
+
+      document.querySelectorAll('.qty-btn').forEach(button => {
+        button.onclick = (e) => {
+          const idx = parseInt(e.target.getAttribute('data-index'));
+          const act = e.target.getAttribute('data-action');
+          changeQty(idx, act === 'plus' ? 1 : -1);
+        };
+      });
+    }
+
+    document.getElementById('btn-add-beef').onclick = () => {
+      const selected = Array.from(document.querySelectorAll('.beef-opt:checked')).map(c => c.value);
+      addToCart('برجر لحم', selected, 2.500);
+    };
+
+    document.getElementById('btn-add-chicken').onclick = () => {
+      const selected = Array.from(document.querySelectorAll('.chicken-opt:checked')).map(c => c.value);
+      addToCart('برجر دجاج', selected, 2.000);
+    };
+
+    document.getElementById('btn-add-fries').onclick = () => {
+      addToCart('بطاطس مقلية', [], 0.800);
+    };
+
+    document.getElementById('btn-add-drink').onclick = () => {
+      const drink = document.querySelector('input[name="drink-choice"]:checked').value;
+      addToCart('مشروب غازي', [drink], 0.500);
+    };
+
+    document.getElementById('send-order-btn').onclick = async function() {
+      const btn = document.getElementById('send-order-btn');
+      const notes = document.getElementById('order-notes').value;
+      const today = getTodayDate();
+      btn.disabled = true;
+      btn.innerText = "جاري إرسال الطلب...";
+
+      try {
+        const counterRef = doc(db, "counters", today);
+        let totalPrice = currentCart.reduce((sum, item) => sum + (item.price * item.count), 0);
+        let newOrderNumber = 1;
+
+        await runTransaction(db, async (transaction) => {
+          const counterDoc = await transaction.get(counterRef);
+          if (!counterDoc.exists()) {
+            transaction.set(counterRef, { lastOrderNumber: 1 });
+            newOrderNumber = 1;
+          } else {
+            newOrderNumber = counterDoc.data().lastOrderNumber + 1;
+            transaction.update(counterRef, { lastOrderNumber: newOrderNumber });
+          }
+        });
+
+        const formattedItems = currentCart.map(i => {
+          const countStr = i.count > 1 ? ` x${i.count}` : '';
+          if (i.options.length > 0) {
+            return `${i.title}${countStr}\n  . ${i.options.join('\n  . ')}`;
+          }
+          return `${i.title}${countStr}`;
+        });
+
+        await addDoc(collection(db, "orders"), {
+          orderNumber: newOrderNumber,
+          items: formattedItems,
+          notes: notes,
+          totalPrice: totalPrice,
+          date: today,
+          status: "pending",
+          createdAt: serverTimestamp()
+        });
+
+        alert(`تم إرسال الطلب بنجاح! رقم الطلب: #${newOrderNumber}`);
+        currentCart = [];
+        document.getElementById('order-notes').value = '';
+        renderCart();
+      } catch (e) {
+        console.error("خطأ: ", e);
+        alert("حدث خطأ أثناء إرسال الطلب.");
+      } finally {
+        btn.innerText = "إرسال الطلب للمطبخ 🚀";
+      }
+    };
+  </script>
+</body>
+  </html>
+  
